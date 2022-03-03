@@ -1,0 +1,56 @@
+[
+    {
+        "author": "Gregor Hohpe",
+        "title": "The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise",
+        "isbn13": "978-1492077541",
+        "url": "https://architectelevator.com/"
+    },
+    {
+        "author": "Gregor Hohpe",
+        "title": "Cloud Strategy: A Decision-based Approach to Successful Cloud Migration",
+        "isbn13": "979-8665253046",
+        "url": "https://architectelevator.com/book/cloudstrategy/"
+    },
+    {
+        "author": "Gregor Hohpe, Bobby Woolf",
+        "title": "Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions",
+        "isbn13": "978-0321200686",
+        "url": "https://www.enterpriseintegrationpatterns.com/"
+    },
+    {
+        "author": "Gregor Hohpe",
+        "title": "37 Things One Architect Knows About IT Transformation",
+        "isbn13": "",
+        "url": "https://architectelevator.com/book/37things/"
+    },
+    {
+        "author": "Neha Narkhede, Gwen Shapira, Todd Palino",
+        "title": "Kafka definitive guide",
+        "isbn13": "978-1491936160",
+        "url": "https://www.confluent.io/resources/kafka-the-definitive-guide/"
+    },
+    {
+        "author": "William Kennedy, Brian Ketelsen, Erik St. Martin",
+        "title": "Go in Action",
+        "isbn13": "978-1617291784 ",
+        "url": "https://www.manning.com/books/go-in-action"
+    },
+    {
+        "author": "Matthew Skelton, Manuel Pais",
+        "title": "Team Topologies: Organizing Business and Technology Teams for Fast Flow",
+        "isbn13": "978-1942788812",
+        "url": "https://teamtopologies.com"
+    },
+    {
+        "author": "Heidi Helfand",
+        "title": "Dynamic Reteaming: The Art and Wisdom of Changing Teams",
+        "isbn13": "978-1492061298",
+        "url": "https://www.heidihelfand.com/dynamic-reteaming/"
+    },
+    {
+        "author": "Ph.D. Nicole Forsgren, Jez Humble, Gene Kim ",
+        "title": "Accelerate: Building and Scaling High Performing Technology Organizations",
+        "isbn13": "978-1942788331",
+        "url": "https://nicolefv.com/book"
+    }
+]
