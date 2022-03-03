@@ -74,13 +74,8 @@ func ensureTopicExists(client *pubsub.Client, topicID string) error {
 	return err
 }
 
-func publish(client *pubsub.Client, topicID string, deadLetterTopicID string, howMany int, delayBy time.Duration, deleteTopic bool) error {
-	err := ensureTopicExists(client, deadLetterTopicID)
-	if err != nil {
-		return err
-	}
-
-	err = ensureTopicExists(client, topicID)
+func publish(client *pubsub.Client, topicID string, howMany int, delayBy time.Duration) error {
+	err := ensureTopicExists(client, topicID)
 	if err != nil {
 		return err
 	}
@@ -124,14 +119,6 @@ func publish(client *pubsub.Client, topicID string, deadLetterTopicID string, ho
 		fmt.Printf("Failed to send: %v\n", err)
 	}
 	fmt.Printf("\nSent %d messages, %d failed.\n", sent, failed)
-
-	if deleteTopic {
-		fmt.Printf("Deleting topic: %s\n", topicID)
-		err = psw.DeleteTopic(*client, topicID)
-		if err != nil {
-			return err
-		}
-	}
 
 	return nil
 }
