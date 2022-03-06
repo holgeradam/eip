@@ -28,13 +28,13 @@ func run() error {
 	var delayBy time.Duration
 
 	flag.StringVar(&projectID, "projectID", "", "Specify the GCP project ID.")
-	flag.StringVar(&topicID, "topicID", "eip-dlc-demo", "Specify a topic ID. Defaults to 'eip-dlc-demo'.")
+	flag.StringVar(&topicID, "topicID", "eip-pub-sub-demo", "Specify a topic ID. Defaults to 'eip-pub-sub-demo'.")
 	flag.IntVar(&howMany, "howMany", 10, "Specify how many messages to send. Defaults to 10.")
 	flag.DurationVar(&delayBy, "delayBy", 3*time.Second, "Specify the pause between messages. Defaults to 3s.")
 	flag.Parse()
 
-	fmt.Println("EIP Pattern Demo: Dead Letter Channel")
-	fmt.Println("-------------------------------------")
+	fmt.Println("EIP Pattern Demo: Publish Subscribe Channel")
+	fmt.Println("-------------------------------------------")
 	fmt.Println("- Publisher -")
 	fmt.Printf("Project ID: %s\n", projectID)
 	fmt.Printf("Topic ID: %s\n", topicID)

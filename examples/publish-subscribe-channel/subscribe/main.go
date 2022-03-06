@@ -21,26 +21,26 @@ func main() {
 
 func run() error {
 	var projectID string
-	var deadLetterTopicID string
+	var topicID string
 	var subID string
 	var howLong time.Duration
 
 	flag.StringVar(&projectID, "projectID", "", "Specify the GCP project ID.")
-	flag.StringVar(&deadLetterTopicID, "deadLetterTopicID", "eip-dlc-demo-dead-letters", "Specify a dead lettertopic ID. Defaults to 'eip-dlc-demo-dead-letters'.")
+	flag.StringVar(&topicID, "topicID", "eip-pub-sub-demo", "Specify a topic ID. Defaults to 'eip-pub-sub-demo'.")
 	flag.StringVar(&subID, "subscriptionID", "sub-"+uuid.NewString(), "Specify a subscription ID. Defaults to 'sub-' and a random UUID.")
 	flag.DurationVar(&howLong, "howLong", 30*time.Second, "Specify the duration for the active subscription. Defaults to 30s.")
 	flag.Parse()
 
-	fmt.Println("EIP Pattern Demo: Dead Letter Channel")
-	fmt.Println("-------------------------------------")
-	fmt.Println("- Dead Letter Topic Subscriber -")
+	fmt.Println("EIP Pattern Demo: Publish Subscribe Channel")
+	fmt.Println("-------------------------------------------")
+	fmt.Println("- Subscriber -")
 	fmt.Printf("Project ID: %s\n", projectID)
-	fmt.Printf("Dead Letter Topic ID: %s\n", deadLetterTopicID)
+	fmt.Printf("Topic ID: %s\n", topicID)
 	fmt.Printf("Subscription ID: %s\n", subID)
 	fmt.Printf("How long: %v\n", howLong)
 	fmt.Println()
 
-	return subscribe(projectID, deadLetterTopicID, subID, howLong)
+	return subscribe(projectID, topicID, subID, howLong)
 }
 
 func ensureTopicExists(client *pubsub.Client, topicID string) error {
@@ -67,25 +67,27 @@ func ensureTopicExists(client *pubsub.Client, topicID string) error {
 	return err
 }
 
-func subscribe(projectID string, deadLetterTopicID string, subID string, howLong time.Duration) error {
+func subscribe(projectID string, topicID string, subID string, howLong time.Duration) error {
 	client, err := psw.GetClient(projectID)
 	if err != nil {
 		return fmt.Errorf("Error creating client: %v", err)
 	}
 
-	err = ensureTopicExists(client, deadLetterTopicID)
+	err = ensureTopicExists(client, topicID)
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Creating subscription %s for dead letter topic %s lasting %v...\n", subID, deadLetterTopicID, howLong)
+	fmt.Printf("Creating subscription %s for topic %s lasting %v...\n", subID, topicID, howLong)
 	fmt.Println()
 
 	ctx := context.Background()
 	sub, err := client.CreateSubscription(ctx, subID, pubsub.SubscriptionConfig{
 		ExpirationPolicy: 24 * time.Hour,
-		Topic:            client.Topic(deadLetterTopicID),
+		Topic:            client.Topic(topicID),
 	})
+	sub.ReceiveSettings.MaxExtension = -1 * time.Second
+
 	if err != nil {
 		return fmt.Errorf("Error creating subscription: %v", err)
 	}
@@ -99,7 +101,7 @@ func subscribe(projectID string, deadLetterTopicID string, subID string, howLong
 	go func() {
 		for msg := range msgsIn {
 			received++
-			fmt.Printf("Received message %s at %v:\nPublish date: %v\n%q\n\n",
+			fmt.Printf("Received message %s at %v:\nPublish date: %v\n%q\n",
 				msg.ID,
 				time.Now().UTC().Format(time.RFC3339Nano),
 				msg.PublishTime.UTC().Format(time.RFC3339Nano),
@@ -111,6 +113,7 @@ func subscribe(projectID string, deadLetterTopicID string, subID string, howLong
 				}
 			}
 			msg.Ack()
+			fmt.Println()
 		}
 	}()
 

@@ -86,6 +86,7 @@ func subscribe(projectID string, topicID string, deadLetterTopicID string, subID
 	}
 
 	fmt.Printf("Creating subscription %s for topic %s lasting %v...\n", subID, topicID, howLong)
+	fmt.Println()
 
 	ctx := context.Background()
 	sub, err := client.CreateSubscription(ctx, subID, pubsub.SubscriptionConfig{
