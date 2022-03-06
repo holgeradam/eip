@@ -29,11 +29,10 @@ func GetTopics(client pubsub.Client) ([]string, error) {
 
 func CreateTopic(client pubsub.Client, topicID string) error {
 	ctx := context.Background()
-	topic, err := client.CreateTopic(ctx, topicID)
+	_, err := client.CreateTopic(ctx, topicID)
 	if err != nil {
 		return fmt.Errorf("Failed to create topic %s: %v", topicID, err)
 	}
-	fmt.Printf("Created topic %s.", topic.ID())
 
 	return nil
 }
@@ -45,7 +44,6 @@ func DeleteTopic(client pubsub.Client, topicID string) error {
 	if err != nil {
 		return fmt.Errorf("Failed to delete topic %s: %v", topicID, err)
 	}
-	fmt.Printf("Deleted topic %s.", topic.ID())
 
 	return nil
 }

@@ -42,12 +42,7 @@ func run() error {
 	fmt.Printf("Delay by: %v\n", delayBy)
 	fmt.Println()
 
-	client, err := psw.GetClient(projectID)
-	if err != nil {
-		return fmt.Errorf("Error creating client: %v", err)
-	}
-
-	return publish(client, topicID, howMany, delayBy)
+	return publish(projectID, topicID, howMany, delayBy)
 }
 
 func ensureTopicExists(client *pubsub.Client, topicID string) error {
@@ -74,13 +69,8 @@ func ensureTopicExists(client *pubsub.Client, topicID string) error {
 	return err
 }
 
-func publish(client *pubsub.Client, topicID string, howMany int, delayBy time.Duration) error {
-	err := ensureTopicExists(client, topicID)
-	if err != nil {
-		return err
-	}
-
-	sampleDataFile, err := ioutil.ReadFile("books.json")
+func publish(projectID string, topicID string, howMany int, delayBy time.Duration) error {
+	sampleDataFile, err := ioutil.ReadFile("../sample-data/books.json")
 	if err != nil {
 		return fmt.Errorf("Error reading sample data file: %v", err)
 	}
@@ -88,6 +78,16 @@ func publish(client *pubsub.Client, topicID string, howMany int, delayBy time.Du
 	err = json.Unmarshal([]byte(sampleDataFile), &books)
 	if err != nil {
 		return fmt.Errorf("Error parsing json from sample data file: %v", err)
+	}
+
+	client, err := psw.GetClient(projectID)
+	if err != nil {
+		return fmt.Errorf("Error creating client: %v", err)
+	}
+
+	err = ensureTopicExists(client, topicID)
+	if err != nil {
+		return err
 	}
 
 	fmt.Println("Publishing messages...")
