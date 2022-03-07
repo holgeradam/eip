@@ -3,6 +3,8 @@
 This is a demo implementation of the enterprise integration pattern
 [Dead Letter Channel](https://www.enterpriseintegrationpatterns.com/patterns/messaging/DeadLetterChannel.html).
 It uses Google Cloud Platform's Pub/Sub as the message system.
+Please note that to enable the subscriber to forward the message to the dead letter topic you need to follow these
+[instructions](https://cloud.google.com/pubsub/docs/handling-failures#granting_forwarding_permissions).
 
 ## How to run
 
