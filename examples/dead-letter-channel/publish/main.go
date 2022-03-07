@@ -29,7 +29,7 @@ func run() error {
 
 	flag.StringVar(&projectID, "projectID", "", "Specify the GCP project ID.")
 	flag.StringVar(&topicID, "topicID", "eip-dlc-demo", "Specify a topic ID. Defaults to 'eip-dlc-demo'.")
-	flag.IntVar(&howMany, "howMany", 10, "Specify how many messages to send. Defaults to 10.")
+	flag.IntVar(&howMany, "howMany", 1, "Specify how many messages to send. Defaults to 1.")
 	flag.DurationVar(&delayBy, "delayBy", 3*time.Second, "Specify the pause between messages. Defaults to 3s.")
 	flag.Parse()
 

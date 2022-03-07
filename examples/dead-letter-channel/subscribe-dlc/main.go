@@ -28,7 +28,7 @@ func run() error {
 	flag.StringVar(&projectID, "projectID", "", "Specify the GCP project ID.")
 	flag.StringVar(&deadLetterTopicID, "deadLetterTopicID", "eip-dlc-demo-dead-letters", "Specify a dead lettertopic ID. Defaults to 'eip-dlc-demo-dead-letters'.")
 	flag.StringVar(&subID, "subscriptionID", "sub-"+uuid.NewString(), "Specify a subscription ID. Defaults to 'sub-' and a random UUID.")
-	flag.DurationVar(&howLong, "howLong", 30*time.Second, "Specify the duration for the active subscription. Defaults to 30s.")
+	flag.DurationVar(&howLong, "howLong", 120*time.Second, "Specify the duration for the active subscription. Defaults to 120s.")
 	flag.Parse()
 
 	fmt.Println("EIP Pattern Demo: Dead Letter Channel")
