@@ -1,14 +1,14 @@
-# Dead Letter Channel with GCP Pub/Sub
+# Dead Letter Channel with GCP PubSub
 
 This is a demo implementation of the enterprise integration pattern
 [Dead Letter Channel](https://www.enterpriseintegrationpatterns.com/patterns/messaging/DeadLetterChannel.html).
-It uses Google Cloud Platform's Pub/Sub as the message system.
+It uses Google Cloud Platform's PubSub as the message system.
 Please note that to enable the subscriber to forward the message to the dead letter topic you need to follow these
 [instructions](https://cloud.google.com/pubsub/docs/handling-failures#granting_forwarding_permissions).
 
 ## How to run
 
-You need to run this as an authenticated GCP user with access to Pub/Sub. Please refer to the
+You need to run this as an authenticated GCP user with access to PubSub. Please refer to the
 [official documentation](https://cloud.google.com/sdk/gcloud/reference/auth/login) on how to do this.
 
 First you start the dead letter topic subscriber from this directoy by running:

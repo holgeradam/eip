@@ -1,12 +1,12 @@
-# Publish-Subscribe Channel with GCP Pub/Sub
+# Publish-Subscribe Channel with GCP PubSub
 
 This is a demo implementation of the enterprise integration pattern
 [Publish-Subscribe Channel](https://www.enterpriseintegrationpatterns.com/patterns/messaging/PublishSubscribeChannel.html).
-It uses Google Cloud Platform's Pub/Sub as the message system.
+It uses Google Cloud Platform's PubSub as the message system.
 
 ## How to run
 
-You need to run this as an authenticated GCP user with access to Pub/Sub. Please refer to the
+You need to run this as an authenticated GCP user with access to PubSub. Please refer to the
 [official documentation](https://cloud.google.com/sdk/gcloud/reference/auth/login) on how to do this.
 
 First you start one or more subscribers from this directoy by running:
