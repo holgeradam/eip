@@ -50,10 +50,8 @@ func init() {
 }
 
 func Route(ctx context.Context, m PubSubMessage) error {
-	decoded := string(m.Data)
-
 	var sampleMessage SampleMessage
-	err := json.Unmarshal([]byte(decoded), &sampleMessage)
+	err := json.Unmarshal([]byte(m.Data), &sampleMessage)
 	if err != nil {
 		log.Printf("Failed to unmarshal json: %v\n", err)
 		return err
